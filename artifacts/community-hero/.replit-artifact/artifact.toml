@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/"
+title = "Community Hero"
+version = "1.0.0"
+id = "artifacts/community-hero"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18251
+
+[services.development]
+run = "pnpm --filter @workspace/community-hero run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/community-hero", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/community-hero/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18251"
+BASE_PATH = "/"
