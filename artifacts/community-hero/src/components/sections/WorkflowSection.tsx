@@ -132,9 +132,6 @@ export function WorkflowSection() {
                   <h4 className="text-sm font-bold text-white/80 font-['Inter'] group-hover:text-white transition-colors leading-snug mb-2">
                     {step.title}
                   </h4>
-                  <p className="text-white/30 text-[11px] font-['Inter'] leading-relaxed group-hover:text-white/50 transition-colors hidden lg:block">
-                    {step.desc}
-                  </p>
                 </div>
               </motion.div>
             ))}
