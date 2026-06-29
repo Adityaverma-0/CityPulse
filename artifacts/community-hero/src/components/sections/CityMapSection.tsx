@@ -18,12 +18,6 @@ const statusCounts = {
 };
 
 export function CityMapSection() {
-  // Suppress Leaflet's default icon path resolution issue in bundlers
-  useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    delete (window as any).L?.Icon?.Default?.prototype?._getIconUrl;
-  }, []);
-
   return (
     <section id="solutions" className="py-24 bg-[#f0f0f53d]">
       <div className="container mx-auto px-8">
