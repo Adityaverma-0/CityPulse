@@ -30,13 +30,6 @@ export function SmartCommunityGrid() {
           <div>
             <h2 className="text-3xl lg:text-4xl font-bold font-['Plus_Jakarta_Sans'] mb-4 text-white">City Health Matrix</h2>
           </div>
-          <div className="mt-6 md:mt-0 text-right">
-            <div className="text-sm text-white/50 mb-1 font-['Space_Grotesk']">System Status</div>
-            <div className="text-accent font-bold tracking-wider flex items-center justify-end gap-2">
-              <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-              OPTIMAL
-            </div>
-          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
