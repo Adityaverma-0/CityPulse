@@ -20,7 +20,6 @@ export function CitizenRewards() {
       <div className="container mx-auto px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold font-['Plus_Jakarta_Sans'] mb-4 text-white">Gamified Civic Engagement</h2>
-          <p className="text-white/60 max-w-2xl mx-auto font-['Inter']">Rewarding citizens who actively participate in maintaining and improving their city's infrastructure.</p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
