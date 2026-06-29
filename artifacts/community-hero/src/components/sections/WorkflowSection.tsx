@@ -70,11 +70,6 @@ export function WorkflowSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-primary/70 mb-5">
-            <span className="w-8 h-px bg-primary/40" />
-            How It Works
-            <span className="w-8 h-px bg-primary/40" />
-          </span>
           <h2 className="text-4xl lg:text-6xl font-extrabold font-['Plus_Jakarta_Sans'] mb-6 text-white leading-tight">
             Intelligent Issue<br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Resolution</span>
