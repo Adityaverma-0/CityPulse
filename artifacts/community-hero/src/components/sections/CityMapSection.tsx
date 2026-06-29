@@ -1,14 +1,14 @@
-import { MapContainer, TileLayer, CircleMarker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, CircleMarker, Popup, Tooltip } from "react-leaflet";
 import { AlertTriangle } from "lucide-react";
 import "leaflet/dist/leaflet.css";
 
 const incidents = [
-  { id: 1, lat: 28.6448, lng: 77.2167, label: "Critical",    status: "Pothole on Ring Road",         color: "#ef4444", fill: "#ef444480" },
-  { id: 2, lat: 19.076,  lng: 72.877,  label: "In Progress", status: "Flooding — Andheri West",       color: "#eab308", fill: "#eab30880" },
-  { id: 3, lat: 12.971,  lng: 77.594,  label: "Resolved",    status: "Streetlight fixed — Koramangala", color: "#22c55e", fill: "#22c55e80" },
-  { id: 4, lat: 22.572,  lng: 88.363,  label: "New",         status: "Garbage overflow — Salt Lake",  color: "#3b82f6", fill: "#3b82f680" },
-  { id: 5, lat: 17.385,  lng: 78.486,  label: "Critical",    status: "Broken drain — Banjara Hills",  color: "#ef4444", fill: "#ef444480" },
-  { id: 6, lat: 26.912,  lng: 75.787,  label: "Resolved",    status: "Road repaired — Jaipur City",   color: "#22c55e", fill: "#22c55e80" },
+  { id: 1, lat: 28.6448, lng: 77.2167, city: "NEW DELHI",  label: "Critical",    status: "Pothole on Ring Road",            color: "#ef4444", fill: "#ef4444" },
+  { id: 2, lat: 19.076,  lng: 72.877,  city: "MUMBAI",     label: "In Progress", status: "Flooding — Andheri West",          color: "#eab308", fill: "#eab308" },
+  { id: 3, lat: 12.971,  lng: 77.594,  city: "BENGALURU",  label: "Resolved",    status: "Streetlight fixed — Koramangala",  color: "#22c55e", fill: "#22c55e" },
+  { id: 4, lat: 22.572,  lng: 88.363,  city: "KOLKATA",    label: "New",         status: "Garbage overflow — Salt Lake",     color: "#3b82f6", fill: "#3b82f6" },
+  { id: 5, lat: 17.385,  lng: 78.486,  city: "HYDERABAD",  label: "Critical",    status: "Broken drain — Banjara Hills",     color: "#ef4444", fill: "#ef4444" },
+  { id: 6, lat: 26.912,  lng: 75.787,  city: "JAIPUR",     label: "Resolved",    status: "Road repaired — Jaipur City",      color: "#22c55e", fill: "#22c55e" },
 ];
 
 const statusCounts = {
@@ -20,6 +20,26 @@ const statusCounts = {
 export function CityMapSection() {
   return (
     <section id="solutions" className="py-24 bg-[#f0f0f53d]">
+      {/* Strip Leaflet tooltip chrome so labels look like the reference */}
+      <style>{`
+        .incident-label {
+          background: transparent !important;
+          border: none !important;
+          box-shadow: none !important;
+          padding: 0 !important;
+          color: #ffffff;
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 0.05em;
+          font-family: 'Inter', sans-serif;
+          white-space: nowrap;
+          text-shadow: 0 1px 3px rgba(0,0,0,0.9), 0 0 6px rgba(0,0,0,0.7);
+        }
+        .incident-label::before { display: none !important; }
+        .leaflet-tooltip-left.incident-label::before,
+        .leaflet-tooltip-right.incident-label::before { display: none !important; }
+      `}</style>
+
       <div className="container mx-auto px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl lg:text-4xl font-bold font-['Plus_Jakarta_Sans'] mb-4 text-white">
@@ -32,7 +52,6 @@ export function CityMapSection() {
         </div>
 
         <div className="relative w-full h-[600px] rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
-          {/* Real map */}
           <MapContainer
             center={[22.5, 80.5]}
             zoom={5}
@@ -51,12 +70,28 @@ export function CityMapSection() {
               <CircleMarker
                 key={inc.id}
                 center={[inc.lat, inc.lng]}
-                radius={10}
-                pathOptions={{ color: inc.color, fillColor: inc.fill, fillOpacity: 1, weight: 2 }}
+                radius={12}
+                pathOptions={{
+                  color: "#ffffff",
+                  weight: 2,
+                  fillColor: inc.fill,
+                  fillOpacity: 1,
+                }}
               >
+                {/* Permanent city-name label — matches reference screenshot */}
+                <Tooltip
+                  permanent
+                  direction="right"
+                  offset={[14, 0]}
+                  className="incident-label"
+                >
+                  {inc.city}
+                </Tooltip>
+
+                {/* Click popup for incident detail */}
                 <Popup>
-                  <div className="text-xs leading-snug">
-                    <div className="font-bold mb-0.5" style={{ color: inc.color }}>{inc.label}</div>
+                  <div style={{ fontSize: 12, lineHeight: 1.5 }}>
+                    <div style={{ fontWeight: 700, marginBottom: 2, color: inc.color }}>{inc.label}</div>
                     <div>{inc.status}</div>
                   </div>
                 </Popup>
