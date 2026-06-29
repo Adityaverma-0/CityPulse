@@ -191,9 +191,6 @@ export function HeroSection({ onReportClick }: HeroSectionProps) {
             >
               Report an Issue <ArrowRight className="w-4 h-4" />
             </Button>
-            <button className="text-xs text-white/40 hover:text-white/70 transition-colors underline underline-offset-4">
-              Explore Dashboard
-            </button>
           </div>
         </motion.div>
       </motion.div>
