@@ -1,5 +1,6 @@
 import express, { Request, Response, Express } from "express";
-import pinoHttp from "pino-http";
+// Change this line to use require-style import syntax for TypeScript:
+import pinoHttp = require("pino-http"); 
 import cors from "cors";
 import router from "./routes";
 import { logger } from "./lib/logger";
@@ -10,7 +11,6 @@ app.use(
   pinoHttp({
     logger,
     serializers: {
-      // Added explicit 'any' or incoming types to bypass TS7006 implicit any error
       req(req: any) {
         return {
           id: req.id,
